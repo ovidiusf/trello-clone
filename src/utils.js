@@ -4,8 +4,12 @@ export function uuid() {
     .slice(2);
 }
 
+/**
+ * Function which saves locally the state of the application
+ * @param {*} store
+ */
 export function saveStatePlugin(store) {
   store.subscribe((mutation, state) =>
-    localStorage.setItem('boards', JSON.stringify(state.boards))
+    localStorage.setItem('board', JSON.stringify(state.board))
   );
 }

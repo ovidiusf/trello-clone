@@ -8,19 +8,19 @@ export default {
       tasks: [
         {
           description: '',
-          name: 'first task',
+          name: 'First task',
           id: uuid(),
           userAssigned: null,
         },
         {
           description: '',
-          name: 'second task',
+          name: 'Second task',
           id: uuid(),
           userAssigned: null,
         },
         {
           description: '',
-          name: 'and thrid',
+          name: 'Third task',
           id: uuid(),
           userAssigned: null,
         },
