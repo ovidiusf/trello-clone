@@ -6,8 +6,9 @@ module.exports = {
   plugins: ['tailwind'],
   extends: [
     'plugin:vue/essential',
-    'plugin:tailwind/recommended'
-    // '@vue/standard'
+    'plugin:tailwind/recommended',
+    // '@vue/standard',
+    "eslint:recommended"
   ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',

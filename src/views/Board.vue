@@ -49,15 +49,15 @@ export default {
     ...mapState(['board']),
     isTaskOpen() {
       return this.$route.name === 'task';
-    },
+    }
   },
   methods: {
     goToTask(task) {
       this.$router.push({
         name: 'task',
         params: {
-          id: task.id,
-        },
+          id: task.id
+        }
       });
     },
     close() {
@@ -66,8 +66,8 @@ export default {
     createTask(event, tasks) {
       this.$store.commit('CREATE_TASK', { tasks, name: event.target.value });
       event.target.value = '';
-    },
-  },
+    }
+  }
 };
 </script>
 
