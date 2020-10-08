@@ -19,11 +19,11 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(["getTask"]),
+    ...mapGetters(['getTask']),
     task() {
       return this.getTask(this.$route.params.id);
     },
@@ -31,7 +31,7 @@ export default {
 
   methods: {
     updateTaskProperty(event, key) {
-      this.$store.commit("UPDATE_TASK", {
+      this.$store.commit('UPDATE_TASK', {
         task: this.task,
         key,
         value: event.target.value,

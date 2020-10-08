@@ -14,10 +14,10 @@ export default {
   computed: {
     typeClasses() {
       switch (this.type) {
-        case "danger":
-          return "bg-red";
+        case 'danger':
+          return 'bg-red';
         default:
-          return "bg-teal";
+          return 'bg-teal';
       }
     },
   },

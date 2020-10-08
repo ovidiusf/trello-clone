@@ -42,30 +42,30 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 
 export default {
   computed: {
-    ...mapState(["board"]),
+    ...mapState(['board']),
     isTaskOpen() {
-      return this.$route.name === "task";
+      return this.$route.name === 'task';
     },
   },
   methods: {
     goToTask(task) {
       this.$router.push({
-        name: "task",
+        name: 'task',
         params: {
           id: task.id,
         },
       });
     },
     close() {
-      this.$router.push({ name: "board" });
+      this.$router.push({ name: 'board' });
     },
     createTask(event, tasks) {
-      this.$store.commit("CREATE_TASK", { tasks, name: event.target.value });
-      event.target.value = "";
+      this.$store.commit('CREATE_TASK', { tasks, name: event.target.value });
+      event.target.value = '';
     },
   },
 };
