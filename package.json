@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "clean": "rm -rf node_modules package-lock.json yarn.lock"
+    "clean": "rm -rf node_modules package-lock.json yarn.lock",
+    "lint:fix": "eslint --config .eslintrc.js --ext .js,.vue src --fix"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
@@ -24,7 +25,8 @@
     "@vue/cli-service": "^3.5.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-tailwind": "^0.2.0",
     "eslint-plugin-vue": "^5.0.0",
     "postcss-preset-env": "^6.3.0",
     "stylus": "^0.54.5",
