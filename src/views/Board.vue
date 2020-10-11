@@ -4,10 +4,12 @@
       <div
         v-for="(column, columnIndex) of board.columns"
         class="column"
+        draggable
         :key="columnIndex"
-        @drop="moveTask($event, column.tasks)"
-        @dragover.prevent
         @dragenter.prevent
+        @dragover.prevent
+        @dragstart.self="pickupColumn($event, columnIndex)"
+        @drop="moveTaskOrColumn($event, column.tasks, columnIndex)"
       >
         <div class="flex items-center mb-2 font-bold">
           {{ column.name }}
@@ -19,7 +21,12 @@
             draggable
             :key="taskIndex"
             @click="goToTask(task)"
+            @dragenter.prevent
+            @dragover.prevent
             @dragstart="pickupTask($event, taskIndex, columnIndex)"
+            @drop.stop="
+              moveTaskOrColumn($event, column.tasks, columnIndex, taskIndex)
+            "
           >
             <span class="w-full flex-no-shrink font-bold">{{ task.name }}</span>
             <p
@@ -72,23 +79,72 @@ export default {
       this.$store.commit('CREATE_TASK', { tasks, name: event.target.value });
       event.target.value = '';
     },
-    moveTask(event, toTasks) {
+    /**
+     * this function moves the indicated task to a new slot
+     * Retrieves the required data from the dataTransfer interface
+     */
+    moveTask(event, toTasks, toTaskIndex) {
       const fromColumnIndex = event.dataTransfer.getData('from-column-index');
       const fromTasks = this.board.columns[fromColumnIndex].tasks;
-      const taskIndex = event.dataTransfer.getData('task-index');
+      const fromTaskIndex = event.dataTransfer.getData('from-task-index');
 
       this.$store.commit('MOVE_TASK', {
         fromTasks,
         toTasks,
-        taskIndex
+        fromTaskIndex,
+        toTaskIndex
       });
     },
+    /**
+     * This function handles the moving of the column
+     * Retrieves the Dragged column index and moves it to the indicated new slot
+     */
+    moveColumn(event, toColumnIndex) {
+      const fromColumnIndex = event.dataTransfer.getData('from-column-index');
+
+      this.$store.commit('MOVE_COLUMN', {
+        fromColumnIndex,
+        toColumnIndex
+      });
+    },
+    /**
+     * This function will handle moving the task or the column (dropping it)
+     * Will retrieve data from the datatransfer interface and decide based on type what is the required action
+     */
+    moveTaskOrColumn(event, toTasks, toColumnIndex, toTaskIndex) {
+      const type = event.dataTransfer.getData('type');
+      if (type === 'task') {
+        this.moveTask(
+          event,
+          toTasks,
+          toTaskIndex !== undefined ? toTaskIndex : toTasks.length
+        );
+      } else {
+        this.moveColumn(event, toColumnIndex);
+      }
+    },
+    /**
+     * This function will handle picking up the task (dragging it)
+     * Will set the required data to the dataTransfer interface
+     */
     pickupTask(event, taskIndex, fromColumnIndex) {
       event.dataTransfer.effectAllowed = 'move';
       event.dataTransfer.dropEffect = 'move';
 
-      event.dataTransfer.setData('task-index', taskIndex);
+      event.dataTransfer.setData('from-task-index', taskIndex);
       event.dataTransfer.setData('from-column-index', fromColumnIndex);
+      event.dataTransfer.setData('type', 'task');
+    },
+    /**
+     * This function will handle picking up the column (dragging it)
+     * Will set the required data to the dataTransfer interface
+     */
+    pickupColumn(event, fromColumnIndex) {
+      event.dataTransfer.effectAllowed = 'move';
+      event.dataTransfer.dropEffect = 'move';
+
+      event.dataTransfer.setData('from-column-index', fromColumnIndex);
+      event.dataTransfer.setData('type', 'column');
     }
   }
 };

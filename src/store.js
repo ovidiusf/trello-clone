@@ -39,9 +39,14 @@ export default new Vuex.Store({
       // Vue.set(task, key, value);
     },
     // the mutation for moving when using the drag and drop api
-    MOVE_TASK(state, { fromTasks, toTasks, taskIndex }) {
-      const taskToMove = fromTasks.splice(taskIndex, 1)[0];
-      toTasks.push(taskToMove);
+    MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex }) {
+      const taskToMove = fromTasks.splice(fromTaskIndex, 1)[0];
+      toTasks.splice(toTaskIndex, 0, taskToMove);
+    },
+    MOVE_COLUMN(state, { fromColumnIndex, toColumnIndex }) {
+      const columnList = state.board.columns;
+      const columnToMove = columnList.splice(fromColumnIndex, 1)[0];
+      columnList.splice(toColumnIndex, 0, columnToMove);
     }
   }
 });

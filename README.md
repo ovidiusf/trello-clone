@@ -1,4 +1,5 @@
-# Trello Clone
+# Trello Clone [![Build Status](https://travis-ci.org/ovidiusf/trello-clone.svg?branch=master)](https://travis-ci.org/ovidiusf/trello-clone)
+
 A project which uses the drag and drop API to implement a tasks dashboard similar to the Trello one.
 
 ## Project setup
