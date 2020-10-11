@@ -33,6 +33,7 @@ export default new Vuex.Store({
         description: ''
       });
     },
+    // updates the task from the dashboard
     UPDATE_TASK(state, { task, key, value }) {
       task[key] = value;
       // Vue.set(task, key, value);
