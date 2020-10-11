@@ -3,12 +3,12 @@ module.exports = {
   env: {
     node: true
   },
-  plugins: ['tailwind'],
+  // plugins: ['tailwind'],
   extends: [
     'plugin:vue/essential',
-    'plugin:tailwind/recommended',
+    // 'plugin:tailwind/recommended',
     // '@vue/standard',
-    "eslint:recommended"
+    'eslint:recommended'
   ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',

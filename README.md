@@ -1,4 +1,5 @@
 # Trello Clone
+A project which uses the drag and drop API to implement a tasks dashboard similar to the Trello one.
 
 ## Project setup
 

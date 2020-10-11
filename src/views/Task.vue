@@ -26,18 +26,17 @@ export default {
     ...mapGetters(['getTask']),
     task() {
       return this.getTask(this.$route.params.id);
-    },
+    }
   },
-
   methods: {
     updateTaskProperty(event, key) {
       this.$store.commit('UPDATE_TASK', {
         task: this.task,
         key,
-        value: event.target.value,
+        value: event.target.value
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
