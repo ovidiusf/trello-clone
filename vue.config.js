@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: '/trello-clone/'
+  publicPath: process.env.NODE_ENV === 'production' ? '/trello-clone/' : '/'
 };
