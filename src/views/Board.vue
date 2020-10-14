@@ -8,6 +8,7 @@
         :columnIndex="columnIndex"
         :key="columnIndex"
       />
+      
       <div class="column flex">
         <input
           v-model="newColumnName"
