@@ -1,51 +1,13 @@
 <template>
   <div class="board">
     <div class="flex flex-row items-start">
-      <div
+      <BoardColumn
         v-for="(column, columnIndex) of board.columns"
-        class="column"
-        draggable
+        :board="board"
+        :column="column"
+        :columnIndex="columnIndex"
         :key="columnIndex"
-        @dragenter.prevent
-        @dragover.prevent
-        @dragstart.self="pickupColumn($event, columnIndex)"
-        @drop="moveTaskOrColumn($event, column.tasks, columnIndex)"
-      >
-        <div class="flex items-center mb-2 font-bold">
-          {{ column.name }}
-        </div>
-        <div class="list-reset">
-          <div
-            v-for="(task, taskIndex) of column.tasks"
-            class="task"
-            draggable
-            :key="taskIndex"
-            @click="goToTask(task)"
-            @dragenter.prevent
-            @dragover.prevent
-            @dragstart="pickupTask($event, taskIndex, columnIndex)"
-            @drop.stop="
-              moveTaskOrColumn($event, column.tasks, columnIndex, taskIndex)
-            "
-          >
-            <span class="w-full flex-no-shrink font-bold">{{ task.name }}</span>
-            <p
-              v-if="task.description"
-              class="w-full flex-no-shrink mt-1 text-sm"
-            >
-              {{ task.description }}
-            </p>
-          </div>
-
-          <input
-            class="block p-2 w-full bg-transparent"
-            placeholder="+ Enter new task"
-            type="text"
-            @keyup.enter="createTask($event, column.tasks)"
-          />
-        </div>
-      </div>
-
+      />
       <div class="column flex">
         <input
           v-model="newColumnName"
@@ -64,8 +26,12 @@
 
 <script>
 import { mapState } from 'vuex';
+import BoardColumn from '../components/BoardColumn.vue';
 
 export default {
+  components: {
+    BoardColumn
+  },
   data() {
     return {
       newColumnName: ''
@@ -78,20 +44,8 @@ export default {
     }
   },
   methods: {
-    goToTask(task) {
-      this.$router.push({
-        name: 'task',
-        params: {
-          id: task.id
-        }
-      });
-    },
     close() {
       this.$router.push({ name: 'board' });
-    },
-    createTask(event, tasks) {
-      this.$store.commit('CREATE_TASK', { tasks, name: event.target.value });
-      event.target.value = '';
     },
     createColumn() {
       this.$store.commit('CREATE_COLUMN', { name: this.newColumnName });
@@ -124,45 +78,6 @@ export default {
         fromColumnIndex,
         toColumnIndex
       });
-    },
-    /**
-     * This function will handle moving the task or the column (dropping it)
-     * Will retrieve data from the datatransfer interface and decide based on type what is the required action
-     */
-    moveTaskOrColumn(event, toTasks, toColumnIndex, toTaskIndex) {
-      const type = event.dataTransfer.getData('type');
-      if (type === 'task') {
-        this.moveTask(
-          event,
-          toTasks,
-          toTaskIndex !== undefined ? toTaskIndex : toTasks.length
-        );
-      } else {
-        this.moveColumn(event, toColumnIndex);
-      }
-    },
-    /**
-     * This function will handle picking up the task (dragging it)
-     * Will set the required data to the dataTransfer interface
-     */
-    pickupTask(event, taskIndex, fromColumnIndex) {
-      event.dataTransfer.effectAllowed = 'move';
-      event.dataTransfer.dropEffect = 'move';
-
-      event.dataTransfer.setData('from-task-index', taskIndex);
-      event.dataTransfer.setData('from-column-index', fromColumnIndex);
-      event.dataTransfer.setData('type', 'task');
-    },
-    /**
-     * This function will handle picking up the column (dragging it)
-     * Will set the required data to the dataTransfer interface
-     */
-    pickupColumn(event, fromColumnIndex) {
-      event.dataTransfer.effectAllowed = 'move';
-      event.dataTransfer.dropEffect = 'move';
-
-      event.dataTransfer.setData('from-column-index', fromColumnIndex);
-      event.dataTransfer.setData('type', 'column');
     }
   }
 };
@@ -171,11 +86,6 @@ export default {
 <style lang="css">
 .task {
   @apply flex items-center flex-wrap shadow mb-2 py-2 px-2 rounded bg-white text-grey-darkest no-underline;
-}
-
-.column {
-  @apply bg-grey-light p-2 mr-4 text-left shadow rounded;
-  min-width: 350px;
 }
 
 .board {
