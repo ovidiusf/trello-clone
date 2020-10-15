@@ -20,6 +20,7 @@
           :task="task"
           :taskIndex="taskIndex"
         />
+
         <input
           class="block p-2 w-full bg-transparent"
           placeholder="+ Enter new task"
@@ -32,10 +33,11 @@
 </template>
 
 <script>
-import ColumnTask from '../components/ColumnTask.vue';
+import ColumnTask from './ColumnTask.vue';
 import movingTasksAndColumnsMixin from '../mixins/movingTasksAndColumnsMixin.js';
 import AppDrag from './AppDrag.vue';
 import AppDrop from './AppDrop.vue';
+
 export default {
   components: {
     AppDrag,
@@ -48,18 +50,6 @@ export default {
       this.$store.commit('CREATE_TASK', { tasks, name: event.target.value });
       event.target.value = '';
     },
-
-    /**
-     * This function will handle picking up the column (dragging it)
-     * Will set the required data to the dataTransfer interface
-     */
-    pickupColumn(event, fromColumnIndex) {
-      event.dataTransfer.effectAllowed = 'move';
-      event.dataTransfer.dropEffect = 'move';
-
-      event.dataTransfer.setData('from-column-index', fromColumnIndex);
-      event.dataTransfer.setData('type', 'column');
-    }
   }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div @dragenter.prevent @dragover.prevent @drop.self="onDrop">
+  <div @dragenter.prevent @dragover.prevent @drop.stop="onDrop">
     <slot />
   </div>
 </template>

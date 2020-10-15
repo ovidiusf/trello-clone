@@ -18,16 +18,14 @@ export default {
      * this function moves the indicated task to a new slot
      * Retrieves the required data from the dataTransfer interface
      */
-    moveTask(event, toTasks, toTaskIndex) {
-      const fromColumnIndex = event.dataTransfer.getData('from-column-index');
+    moveTask( {fromColumnIndex, fromTaskIndex}) {
       const fromTasks = this.board.columns[fromColumnIndex].tasks;
-      const fromTaskIndex = event.dataTransfer.getData('from-task-index');
 
       this.$store.commit('MOVE_TASK', {
         fromTasks,
-        toTasks,
         fromTaskIndex,
-        toTaskIndex
+        toTasks :this.column.tasks,
+        toTaskIndex: this.taskIndex
       });
     },
     /**

@@ -17,11 +17,7 @@ export default {
       event.dataTransfer.effectAllowed = 'move';
       event.dataTransfer.dropEffect = 'move';
 
-      const stringifiedPayload =  JSON.stringify(this.transferData);
-
-      event.dataTransfer.setData('payload', stringifiedPayload);
-
-      console.info(event.dataTransfer);
+      event.dataTransfer.setData('payload', JSON.stringify(this.transferData));
     }
   }
 };
