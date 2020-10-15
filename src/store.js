@@ -42,7 +42,6 @@ export default new Vuex.Store({
     // updates the task from the dashboard
     UPDATE_TASK(state, { task, key, value }) {
       task[key] = value;
-      // Vue.set(task, key, value);
     },
     // the mutation for moving when using the drag and drop api
     MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex }) {
@@ -51,6 +50,7 @@ export default new Vuex.Store({
     },
     MOVE_COLUMN(state, { fromColumnIndex, toColumnIndex }) {
       const columnList = state.board.columns;
+      
       const columnToMove = columnList.splice(fromColumnIndex, 1)[0];
       columnList.splice(toColumnIndex, 0, columnToMove);
     }
