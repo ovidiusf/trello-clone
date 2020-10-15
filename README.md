@@ -2,34 +2,43 @@
 
 A project which uses the drag and drop API to implement a tasks dashboard similar to the Trello one.
 
+Uses the following technologies:
+* Vue
+* Vuex
+* Vue Router
+* Tailwind
+
+Deployed using the Travis CI.
+
 ## Project setup
 
 ```
-yarn install
+npm install
 ```
 
 ### Compiles and hot-reloads for development
 
 ```
-yarn run serve
+npm run serve
 ```
 
 ### Compiles and minifies for production
 
 ```
-yarn run build
+npm run build
 ```
 
 ### Run your tests
+Currently there are not tests
 
 ```
-yarn run test
+npm run test
 ```
 
 ### Lints and fixes files
 
 ```
-yarn run lint
+npm run lint:fix
 ```
 
 ### Customize configuration
