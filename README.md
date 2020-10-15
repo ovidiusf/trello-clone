@@ -7,6 +7,7 @@ Uses the following technologies:
 * Vuex
 * Vue Router
 * Tailwind
+* Drag and Drop API
 
 Deployed using the Travis CI.
 

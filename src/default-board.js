@@ -7,20 +7,20 @@ export default {
       name: 'todo',
       tasks: [
         {
-          description: 'The first task',
-          name: 'First task',
+          description: 'The new website requires deploying. Pick a suitable building tool. ',
+          name: 'Deploy new website',
           id: uuid(),
           userAssigned: null
         },
         {
-          description: 'The second task',
-          name: 'Second task',
+          description: 'Find a good technology for the frontend',
+          name: 'Frontend Stack',
           id: uuid(),
           userAssigned: null
         },
         {
-          description: 'Is this the third task?',
-          name: 'Third task',
+          description: 'What database should be used?',
+          name: 'Backend - DB',
           id: uuid(),
           userAssigned: null
         }
@@ -30,8 +30,8 @@ export default {
       name: 'in-progress',
       tasks: [
         {
-          description: '',
-          name: 'first task',
+          description: 'Prototype a nice design for the website.',
+          name: 'Developing figma design',
           id: uuid(),
           userAssigned: null
         }
@@ -41,8 +41,8 @@ export default {
       name: 'done',
       tasks: [
         {
-          description: 'Done first task',
-          name: 'first task',
+          description: 'First meeting with the client for requirements.',
+          name: 'Requirements',
           id: uuid(),
           userAssigned: null
         }
